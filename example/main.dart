@@ -1,13 +1,8 @@
-# ReduRx
-👌 A thin layer of a Redux-based state manager on top of RxDart.
-
-## Usage
-
-```dart
 import 'package:redurx/redurx.dart';
 
 class State {
   State(this.count);
+
   final int count;
 }
 
@@ -29,4 +24,3 @@ void main() {
   store.dispatch(Increment(2));
   print(store.state.count); // 3
 }
-```

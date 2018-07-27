@@ -15,7 +15,10 @@ abstract class AsyncAction<T> implements ActionType {
 }
 
 class Store<T> {
-  final subject = BehaviorSubject<T>();
+  Store([T initialState])
+      : subject = BehaviorSubject<T>(seedValue: initialState);
+
+  final BehaviorSubject<T> subject;
 
   Stream<T> get stream => subject.stream;
   T get state => subject.value;
