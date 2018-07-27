@@ -18,6 +18,7 @@ class Store<T> {
   final subject = BehaviorSubject<T>();
 
   Stream<T> get stream => subject.stream;
+  T get state => subject.value;
   Stream<S> map<S>(S convert(T state)) => stream.map(convert);
 
   Store<T> dispatch(ActionType action) {
@@ -31,4 +32,6 @@ class Store<T> {
 
     return this;
   }
+
+  void close() => subject.close();
 }

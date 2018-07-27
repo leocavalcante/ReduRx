@@ -4,3 +4,6 @@ description: A thin layer of a Redux-based state manager on top of RxDart.
 
 dependencies:
   rxdart:
+
+dev_dependencies:
+  test:
