@@ -1,7 +1,7 @@
 # ReduRx
 👌 A thin layer of a Redux-based state manager on top of RxDart.
 
-> [Flutter bindings](https://github.com/leocavalcante/Flutter-ReduRx)
+[Flutter bindings](https://github.com/leocavalcante/Flutter-ReduRx) &bull; [React bindings](https://github.com/leocavalcante/React-ReduRx)
 
 ## Usage
 
