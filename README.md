@@ -3,6 +3,9 @@
 
 [Flutter bindings](https://github.com/leocavalcante/Flutter-ReduRx) &bull; [React bindings](https://github.com/leocavalcante/React-ReduRx)
 
+## Getting started
+* [Tutorial: Handling State in Flutter with ReduRx](https://medium.com/@leocavalcante/tutorial-handling-state-in-flutter-with-redurx-b4d50c647e4a)
+
 ## Usage
 
 ```dart
@@ -39,3 +42,7 @@ void main() {
   print(store.state.count); // 3
 }
 ```
+
+---
+
+Just give it a try. Feel free to open Issues and PRs!
