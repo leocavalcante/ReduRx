@@ -2,8 +2,10 @@ import 'package:redurx/redurx.dart';
 
 class State {
   State(this.count);
-
   final int count;
+
+  @override
+  String toString() => count.toString();
 }
 
 class Increment extends Action<State> {
@@ -15,12 +17,16 @@ class Increment extends Action<State> {
 void main() {
   final store = Store<State>(State(0));
 
-  print(store.state); // Instance of 'State'
+  store.add(LogMiddleware<State>());
   print(store.state.count); // 0
 
   store.dispatch(Increment());
+  // Before action: Increment: 0 (from LogMiddleware)
+  // After action: Increment: 1 (from LogMiddleware)
   print(store.state.count); // 1
 
   store.dispatch(Increment(2));
+  // Before action: Increment: 1 (from LogMiddleware)
+  // After action: Increment: 3 (from LogMiddleware)
   print(store.state.count); // 3
 }
