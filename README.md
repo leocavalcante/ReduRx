@@ -1,4 +1,4 @@
-# ReduRx
+# ReduRx [![Build Status](https://travis-ci.org/leocavalcante/ReduRx.svg?branch=master)](https://travis-ci.org/leocavalcante/ReduRx)
 👌 A thin layer of a Redux-based state manager on top of RxDart.
 
 [Flutter bindings](https://github.com/leocavalcante/Flutter-ReduRx) &bull; [React bindings](https://github.com/leocavalcante/React-ReduRx)
