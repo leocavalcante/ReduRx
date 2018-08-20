@@ -8,6 +8,9 @@ class State {
 
   @override
   bool operator ==(other) => count == other.count;
+
+  @override
+  String toString() => count.toString();
 }
 
 class Increment extends Action<State> {
@@ -17,7 +20,10 @@ class Increment extends Action<State> {
 
 class AsyncIncrement extends AsyncAction<State> {
   @override
-  Future<State> reduce(State state) async => State(state.count + 1);
+  Future<Computation<State>> reduce(State state) async {
+    await Future.delayed(const Duration(seconds: 2));
+    return (State state) => State(state.count + 1);
+  }
 }
 
 class BeforeActionMiddleware extends Middleware<State> {

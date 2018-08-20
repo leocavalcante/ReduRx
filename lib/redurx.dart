@@ -12,8 +12,10 @@ abstract class Action<T> implements ActionType {
   T reduce(T state);
 }
 
+typedef T Computation<T>(T state);
+
 abstract class AsyncAction<T> implements ActionType {
-  Future<T> reduce(T state);
+  Future<Computation<T>> reduce(T state);
 }
 
 abstract class Middleware<T> {
@@ -33,17 +35,19 @@ class Store<T> {
   Stream<S> map<S>(S convert(T state)) => stream.map(convert);
 
   Store<T> dispatch(ActionType action) {
-    final beforeMiddlewares = middlewares.fold<T>(
-        state, (state, middleware) => middleware.beforeAction(action, state));
-
     if (action is Action<T>) {
-      final afterAction = action.reduce(beforeMiddlewares);
+      final afterAction =
+          action.reduce(_computeBeforeMiddlewares(action, state));
       final afterMiddlewares = _foldAfterActionMiddlewares(afterAction, action);
       subject.add(afterMiddlewares);
     }
 
     if (action is AsyncAction<T>) {
-      action.reduce(beforeMiddlewares).then((afterAction) {
+      action
+          .reduce(_computeBeforeMiddlewares(action, state))
+          .then((computation) {
+        final afterAction =
+            computation(_computeBeforeMiddlewares(action, state));
         final afterMiddlewares =
             _foldAfterActionMiddlewares(afterAction, action);
         subject.add(afterMiddlewares);
@@ -59,6 +63,10 @@ class Store<T> {
   }
 
   void close() => subject.close();
+
+  T _computeBeforeMiddlewares(ActionType action, T state) =>
+      middlewares.fold<T>(
+          state, (state, middleware) => middleware.beforeAction(action, state));
 
   T _foldAfterActionMiddlewares(T initialValue, ActionType action) =>
       middlewares.fold<T>(initialValue,

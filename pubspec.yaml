@@ -1,5 +1,5 @@
 name: redurx
-version: 0.2.0+11
+version: 0.3.0+12
 description: A thin layer of a Redux-based state manager on top of RxDart.
 author: leocavalcante <lc@leocavalcante.com>
 homepage: https://github.com/leocavalcante/ReduRx
