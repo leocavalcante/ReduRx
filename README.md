@@ -9,6 +9,7 @@
 ## Usage
 
 ```dart
+import 'dart:async';
 import 'package:redurx/redurx.dart';
 
 class State {
@@ -23,6 +24,16 @@ class Increment extends Action<State> {
   Increment([this.by = 1]);
   final int by;
   State reduce(State state) => State(state.count + by);
+}
+
+class AsyncIncrement extends AsyncAction<State> {
+  @override
+  Future<Computation<State>> reduce(State state) async {
+    int result = await doAsyncTask();
+    return (State state) =>
+      State(count: state.count + result);
+    }
+  }
 }
 
 void main() {
