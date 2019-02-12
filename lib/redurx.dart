@@ -31,10 +31,10 @@ abstract class AsyncAction<T> implements ActionType {
 /// Interface for Middlewares.
 abstract class Middleware<T> {
   /// Called before action reducer.
-  T beforeAction(ActionType action, T state) => state;
+  T beforeAction(Store<T> store, ActionType action, T state) => state;
 
   /// Called after action reducer.
-  T afterAction(ActionType action, T state) => state;
+  T afterAction(Store<T> store, ActionType action, T state) => state;
 }
 
 /// The heart of the idea, this is where we control the State and dispatch Actions.
@@ -94,10 +94,10 @@ class Store<T> {
   void close() => subject.close();
 
   T _computeBeforeMiddlewares(ActionType action, T state) =>
-      middlewares.fold<T>(
-          state, (state, middleware) => middleware.beforeAction(action, state));
+      middlewares.fold<T>(state,
+          (state, middleware) => middleware.beforeAction(this, action, state));
 
   T _foldAfterActionMiddlewares(T initialValue, ActionType action) =>
       middlewares.fold<T>(initialValue,
-          (state, middleware) => middleware.afterAction(action, state));
+          (state, middleware) => middleware.afterAction(this, action, state));
 }
