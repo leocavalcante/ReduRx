@@ -23,6 +23,9 @@ typedef T Computation<T>(T state);
 abstract class AsyncAction<T> implements ActionType {
   /// Method to perform a asynchronous mutation on the state.
   Future<Computation<T>> reduce(T state);
+
+  /// A pre computation reduce, useful for loading states.
+  T reduceSync(T state) => state;
 }
 
 /// Interface for Middlewares.
@@ -74,6 +77,8 @@ class Store<T> {
             _foldAfterActionMiddlewares(afterAction, action);
         subject.add(afterMiddlewares);
       });
+
+      subject.add(action.reduceSync(state));
     }
 
     return this;
