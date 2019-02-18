@@ -1,3 +1,6 @@
+Please, check out: https://github.com/leocavalcante/observable_state
+--
+
 # ReduRx [![Build Status](https://travis-ci.org/leocavalcante/ReduRx.svg?branch=master)](https://travis-ci.org/leocavalcante/ReduRx)
 👌 A thin layer of a Redux-based state manager on top of RxDart.
 
